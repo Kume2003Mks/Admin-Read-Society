@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Icon } from '@iconify/react';
 function Boxbear({TBOXT,icon}:any) {
   return (
