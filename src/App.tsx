@@ -1,38 +1,68 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import './App.css'
-import TE from './sibear/T'
-import Boxbear from './sibear/Boxbear.tsx'
-import { Icon } from '@iconify/react';
+
+
+import THome from './pages/THome.tsx'
+import Ui_element from './pages/Ui-element.tsx'
+import Books_Stoer from './pages/Books Stoer.tsx'
+import AddBooks from './pages/AddBooks.tsx'
+import EditBooks from './pages/EditBooks.tsx'
+import Community from './pages/Community.tsx'
+import Communt from './pages/Communt.tsx'
+import UserData from './pages/UserData.tsx'
+import Setting from './pages/Setting.tsx'
+const router = createBrowserRouter([
+  {
+    path : "/",
+    element : <THome/>
+  },
+  {
+    path : "/UI-Element",
+    element : <Ui_element/>
+  },
+  {
+    path : "/Books_Store",
+    element : <Books_Stoer/>
+  },
+  {
+    path : "/AddBook",
+    element : <AddBooks/>
+  },
+  {
+    path : "/EditBooks",
+    element : <EditBooks/>
+  },
+  {
+    path : "/Community",
+    element : <Community/>
+  },
+  {
+    path : "/Communt",
+    element : <Communt/>
+  },
+  {
+    path : "/UserData",
+    element : <UserData/>
+  },
+  {
+    path : "/Setting",
+    element : <Setting/>
+  }
+
+])
+function lout(){
+  return ( 
+  <>
+  
+  </>
+  )
+}
 function App() {
   const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <TE />
-      <div className='flex'>
-        <div className="w-fit h-screen bg-[#ffffff]">
-          <Boxbear icon='ic:round-dashboard' TBOXT='Dashboard' />
-          <Boxbear icon='radix-icons:dashboard' TBOXT='UI-Element' />
-          <Boxbear icon='wpf:books' TBOXT='Books Store' />
-          <Boxbear icon='fluent:book-add-24-filled' TBOXT='Add books' />
-          <Boxbear icon='material-symbols:edit' TBOXT='Edit books' />
-          <Boxbear icon='fluent:people-community-16-filled' TBOXT='Community' />
-          <Boxbear icon='majesticons:comment' TBOXT='Comment' />
-          <Boxbear icon='ic:round-dashboard' TBOXT='User Data' />
-          <Boxbear icon='tdesign:setting-1' TBOXT='Setting' />
-        </div>
-        <div className='flex flex-1 flex-col p-3 gap-3'>
+  return ( <RouterProvider router={router}/>
 
-          <div className='flex flex-1 gap-3'>
-            <div className='bg-white flex-[2] rounded-xl' />
-            <div className='bg-white flex-1 rounded-xl' />
-          </div> 
-          <div className='flex-1 bg-white rounded-xl'></div>
-        </div>
-      </div>
-    </>
   )
 }
 
