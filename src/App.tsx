@@ -1,68 +1,34 @@
 import { useState } from 'react'
-import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 import './App.css'
 
-
-import THome from './pages/THome.tsx'
-import Ui_element from './pages/Ui-element.tsx'
-import Books_Stoer from './pages/Books Stoer.tsx'
-import AddBooks from './pages/AddBooks.tsx'
-import EditBooks from './pages/EditBooks.tsx'
-import Community from './pages/Community.tsx'
-import Communt from './pages/Communt.tsx'
-import UserData from './pages/UserData.tsx'
-import Setting from './pages/Setting.tsx'
-const router = createBrowserRouter([
-  {
-    path : "/",
-    element : <THome/>
-  },
-  {
-    path : "/UI-Element",
-    element : <Ui_element/>
-  },
-  {
-    path : "/Books_Store",
-    element : <Books_Stoer/>
-  },
-  {
-    path : "/AddBook",
-    element : <AddBooks/>
-  },
-  {
-    path : "/EditBooks",
-    element : <EditBooks/>
-  },
-  {
-    path : "/Community",
-    element : <Community/>
-  },
-  {
-    path : "/Communt",
-    element : <Communt/>
-  },
-  {
-    path : "/UserData",
-    element : <UserData/>
-  },
-  {
-    path : "/Setting",
-    element : <Setting/>
-  }
-
-])
-function lout(){
-  return ( 
-  <>
-  
-  </>
-  )
-}
 function App() {
   const [count, setCount] = useState(0)
 
-  return ( <RouterProvider router={router}/>
-
+  return (
+    <>
+      <div>
+        <a href="https://vitejs.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
   )
 }
 
