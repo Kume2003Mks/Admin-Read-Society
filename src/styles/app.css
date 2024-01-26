@@ -1,0 +1,22 @@
+.main_layout{
+    display: flex;
+}
+
+.main_container{
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container{
+    background: #E4E4E4;
+    display: flex;
+    flex: 1;
+    padding: 8px;
+    gap: 8px;
+}
+
+.flex-col{
+    flex-direction: column;
+}

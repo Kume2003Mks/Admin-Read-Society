@@ -1,0 +1,93 @@
+.banner {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+    padding: 1rem;
+    background: white;
+    border-radius: 1rem;
+    overflow-y: auto;
+    gap: 1rem;
+}
+
+.image_container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    & img{
+        width: 100%;
+        aspect-ratio: 36/9;
+        object-fit: cover;
+        border-radius: 1rem;
+        border: 2px solid black;
+    }
+}
+
+.remove_img {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: 4px;
+    padding: 8px;
+    border-radius: 100px;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 1rem;
+}
+
+.icon, .upload_icon {
+    width: 100%;
+    height: 100%;
+}
+
+.upload_box{
+    display: flex;
+    background-color: lightgray;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit_image{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;    
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    border-radius: 1rem;
+    justify-content: center;
+    overflow-y: hidden;
+    aspect-ratio: 36/9;
+
+    & img{
+        width: 100%;
+        aspect-ratio: 36/9;
+        object-fit: cover;
+    }
+
+    & input {
+        display: none;
+    }
+}
+
+.btn {
+    position: absolute;
+    cursor: pointer;
+    margin: 1.5rem;
+    padding: 4px;
+    background-color: #005FC7;
+    width: 6rem;
+    height: 2rem;
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    font-size: 18px;
+    right: 0;
+    bottom: 0;
+}
