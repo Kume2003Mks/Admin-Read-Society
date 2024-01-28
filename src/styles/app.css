@@ -1,3 +1,39 @@
+:root {
+    --list-background-color: #c5c5c5;
+    /* --desktop-background: linear-gradient(161deg, rgb(58, 87, 180) 0%, rgba(29, 253, 190, 1) 50%, rgba(69, 186, 252, 1) 100%); */
+    --desktop-background: url('/Cloudy.svg');
+    --mobile-background: radial-gradient(circle, rgba(112, 240, 255, 1) 0%, rgba(159, 148, 233, 1) 44%, rgba(101, 61, 232, 1) 100%);
+    --tablet-font-size: 12pt;
+    --mobile-font-size: 14pt;
+    --grid-gap: 1rem;
+    --icon-size: 1.5rem;
+    --tablet-icon-size: 1.25rem;
+  }
+
+  .dark-mode{
+    --list-background-color: #404040;
+  }
+
+  .p-container {
+    padding-top: 64px;
+  }
+
+  .blackground-css {
+    background: var(--primary-color);
+    background: var(--desktop-background);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    padding-top: 8vh;
+  }
+
 .main_layout{
     display: flex;
 }

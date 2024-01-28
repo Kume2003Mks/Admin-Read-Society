@@ -35,14 +35,20 @@ const Banner = () => {
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
             confirmButtonText: 'Yes, delete it!'
-        }).then(async () => {
-            try {
-                const bannerInstance = new Banners();
-                await bannerInstance.deleteBanner(bannerId);
-                setReloadComponent((prev) => !prev);
-
-            } catch (error) {
-                console.error("Error deleting banner:", error);
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const bannerInstance = new Banners();
+                    await bannerInstance.deleteBanner(bannerId);
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+                    setReloadComponent((prev) => !prev);
+                } catch (error) {
+                    console.error("Error deleting banner:", error);
+                }
             }
         });
 

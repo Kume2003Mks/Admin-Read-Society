@@ -1,0 +1,72 @@
+:root {
+    --text-border: 2px solid black;
+}
+
+:global(.dark-mode) {
+
+    --text-border: 2px solid rgb(100, 100, 100);
+}
+
+.comment_container {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+}
+
+.profile {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100px;
+    overflow: hidden;
+    border: var(--text-border);
+
+   img { 
+        cursor: pointer;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.comment_content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border-radius: 8px;
+    border: var(--text-border);
+    overflow: hidden;
+    padding: 8px;
+}
+
+.user_name {
+    display: flex;
+    justify-content: space-between;
+    & h1 {
+        cursor: pointer;
+        font-weight: bold;
+    }
+    & p {
+        font-size: x-small;
+    }
+}
+
+.interact_bar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.icon_btn {
+    width: 25px;
+    height: 25px;
+    color: red;
+}
+
+.line{
+    width: 100%;
+    height: 2px;
+    border-top: 2px solid black;
+}

@@ -52,6 +52,7 @@ export type Post = {
 }
 
 export type Comment = {
+    id?: string;
     text?: string;
     profile?: Profile;
     uid: string;

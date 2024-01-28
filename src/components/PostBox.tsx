@@ -1,0 +1,106 @@
+import styles from '../styles/Component.module.css'
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import { useState } from 'react';
+import { Timestamp } from 'firebase/firestore';
+import { Icon } from '@iconify/react';
+
+export type PostBox = {
+    uid: string;
+    image?: string[];
+    text?: string;
+    username?: string;
+    userprofile?: string;
+    isSpoil?: boolean;
+    timestamp: Timestamp;
+    id?: string;
+    onDelete?: () => void;
+    onComment?: () => void;
+}
+
+const PostBox: React.FC<PostBox> = ({ image, text, username, userprofile, timestamp, onDelete, onComment }) => {
+
+    const [showFullText, setShowFullText] = useState(false);
+
+    const displayText = showFullText ? text : text?.split('\n').slice(0, 3).join('\n');
+
+    const formattedDate = timestamp
+        ? new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000)
+        : null;
+
+    const formatDate = (date: Date | null) => {
+        if (!date) return 'No date';
+
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear();
+        const hour = date.getHours().toString().padStart(2, '0');
+        const minute = date.getMinutes().toString().padStart(2, '0');
+
+        return `${day}/${month}/${year} ${hour}:${minute}`;
+    };
+
+    const formattedDateString = formatDate(formattedDate);
+
+    return (
+        <div className={styles.post_Box}>
+            <div className={styles.user}>
+                <img src={userprofile} alt={username} className={styles.profile_user} />
+                <div>
+                    <h1>{username}</h1>
+                    <p>{formattedDateString}</p>
+                </div>
+            </div>
+
+            <div className={styles.contentWrapper}>
+
+                <p style={{ whiteSpace: 'pre-line' }}>{displayText}</p>
+                {text && text.split('\n').length > 3 && !showFullText && (
+                    <p
+                        className={styles.read_more}
+                        onClick={() => setShowFullText(true)}
+                    >
+                        Read more...
+                    </p>
+                )}
+                {image && image.length > 0 && (
+                    <Swiper
+                        pagination={{
+                            clickable: true,
+                        }}
+                        navigation={image.length > 1 ? true : false}
+                        modules={[Pagination, Navigation]}
+                        className={styles.post_image}
+                    >
+                        {image.map((imageSrc, index) => (
+                            <SwiperSlide key={index}>
+                                <img src={imageSrc} className={styles.fit} alt={`Image ${index + 1}`} loading="lazy" />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                )}
+
+            </div>
+            <div className={styles.interact_bar}>
+                <div onClick={onDelete}>
+                    <Icon icon="solar:trash-bin-trash-bold" className={styles.icon_btn} />
+                    <p>Delete</p>
+                </div>
+
+                <div onClick={onComment}>
+                    <Icon icon="fluent:comment-20-filled" className={styles.icon_btn} />
+                    <p>View Comment</p>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default PostBox

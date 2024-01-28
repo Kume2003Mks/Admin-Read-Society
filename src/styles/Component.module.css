@@ -1,0 +1,229 @@
+:root {
+    --border-color: black;
+    --icon-color: black;
+    --background-color: white;
+    --btn-hover: lightgrey;
+    --button-color: #005FC7;
+    --card-color: #3d3d3d40;
+    --text-input: #D9D9D9;
+    --input-border: 1px solid black;
+}
+
+.A4_Size {
+    aspect-ratio: 1/1.41;
+}
+
+.icon_color {
+    color: var(--icon-color);
+}
+
+.book_card {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.5rem;
+    height: fit-content;
+    justify-content: center;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    scroll-snap-align: start;
+}
+
+.book_card:hover{
+    background-color: var(--card-color);
+}
+
+.post_Box {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.75rem 0.75rem 1.75rem;
+    border-radius: 0.75rem;
+    border: 2px solid black;
+    gap: 1rem;
+    width: 100%;
+}
+
+.post_Box_modal {
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem 1.75rem 0.75rem 1.75rem;
+    background-color: var(--background-color);
+    gap: 1rem;
+    width: 100%;
+}
+
+.interact_bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+    gap: 8px;
+}
+
+.interact_bar_modal {
+    display: flex;
+    padding: 4px 0 4px 0;
+    border-color: var(--border-color);
+    border-width: 2px 0 2px 0;
+    width: 100%;
+    justify-content: space-between;
+    align-content: center;
+    gap: 8px;
+}
+
+.interact_bar_modal div {
+    display: flex;
+    padding: 4px;
+    flex: 1;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.interact_bar_modal div:hover {
+    background-color: var(--btn-hover);
+    border-radius: 8px;
+}
+
+.interact_bar div {
+    display: flex;
+    padding: 4px;
+    flex: 1;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.interact_bar div:hover {
+    background-color: var(--btn-hover);
+    border-radius: 8px;
+}
+
+.comment_box_input {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 8px;
+}
+
+.sendButton {
+    display: flex;
+    aspect-ratio: 1;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background-color: var(--button-color);
+    color: white;
+    border-radius: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.comment_box_input input {
+    flex: 1;
+    padding: 8px;
+    background-color: var(--text-input);
+    border: var(--input-border);
+    border-radius: 3rem;
+    color: var(--main-text-color);
+}
+
+.icon_btn {
+    width: 25px;
+    height: 25px;
+    color: var(--icon-color);
+}
+
+.post_image {
+    aspect-ratio: 6/4;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    width: 100%;
+}
+
+.fit{
+    aspect-ratio: 6/4;
+    object-fit: cover;
+    width: 100%;
+}
+
+.user {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.user h1 {
+    font-size: 1.25rem;
+}
+
+.user p {
+    font-size: 0.75rem;
+}
+
+.profile_user {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    border-width: 2px;
+    border-color: var(--border-color);
+    object-fit: cover;
+}
+
+.circle {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+.header {
+    font-size: 10pt;
+    font-weight: bold;
+    line-height: 1rem;
+}
+
+.filter_list {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 2px solid var(--border-color);
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.contentWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.spoiler_text {
+    align-self: center;
+    bottom: 50%;
+    position: absolute;
+    cursor: pointer;
+    text-decoration: underline;
+    color: red;
+    z-index: 1;
+}
+
+.spoiler {
+    filter: blur(1rem);
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+
+.read_more {
+    text-decoration: underline;
+    cursor: pointer;
+}

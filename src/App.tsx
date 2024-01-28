@@ -1,21 +1,32 @@
 import './styles/app.css'
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Bookstore from './pages/Bookstore';
 import Community from './pages/Community';
 import Banner from './pages/Banner';
+import LoginPage from './pages/LoginPage';
+import { ProtectRouteProps } from './function/DeclareType';
+import { useAuth } from './function/AuthContext';
 
 
 function App() {
 
+  const { isLoggedIn } = useAuth();
+
+  const ProtectRoute: React.FC<ProtectRouteProps> = ({ user, children }) => {
+    return user ? children : <Navigate to='/login' />;
+  }
+
   const Layout = () => {
     return (
-      <div className='main_layout'>
-        <Navigation />
-        <main className='main_container'>
+      <ProtectRoute user={isLoggedIn}>
+        <div className='main_layout'>
+          <Navigation />
+          <main className='main_container'>
             <Outlet />
-        </main>
-      </div>
+          </main>
+        </div>
+      </ProtectRoute>
     )
   }
 
@@ -69,7 +80,11 @@ function App() {
           element: <div />,
         }
       ]
-    }
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
+    },
 
   ])
 

@@ -1,23 +1,8 @@
-import { collection, getDocs, doc } from "firebase/firestore";
-import { database } from "../utils/firebase";
-import { Book } from "./DeclareType";
+import { collection, getDocs, doc, getDoc, deleteDoc } from "firebase/firestore";
+import { database, storage } from "../utils/firebase";
+import { Book, Episode, Comment } from "./DeclareType";
 import FatchProfiles from "./FetchProfiles";
-
-// interface BookData {
-//     title: string;
-//     genre: string;
-//     genre2: string;
-//     type: string;
-//     description: string;
-//     tags: string[];
-//     modified: Date;
-//     thumbnail?: string;
-// }
-
-// interface EpData {
-//     title: string;
-//     url?: string;
-// }
+import { deleteObject, ref } from "firebase/storage";
 
 export default class Books {
 
@@ -73,5 +58,91 @@ export default class Books {
             return [];
         }
     }
+
+    public async deleteBook(bookId: string) {
+        try {
+          const booksCollection = collection(database, 'books');
+          const bookRef = doc(booksCollection, bookId);
+    
+          const bookDoc = await getDoc(bookRef);
+          const bookData = bookDoc.data() as Book;
+    
+          if (bookData.thumbnail) {
+            const thumbnailRef = ref(storage, bookData.thumbnail);
+            await deleteObject(thumbnailRef);
+          }
+    
+          const epsCollection = collection(database, 'books', bookId, 'ep');
+          const epsQuerySnapshot = await getDocs(epsCollection);
+    
+          await Promise.all(
+            epsQuerySnapshot.docs.map(async (doc) => {
+              const epData = doc.data() as Episode;
+              if (epData.url) {
+                const epUrlRef = ref(storage, epData.url);
+                await deleteObject(epUrlRef);
+              }
+            })
+          );
+    
+          await deleteDoc(bookRef);
+    
+          sessionStorage.removeItem('booksData');
+          sessionStorage.removeItem(`Bookdata${bookData.owner}`);
+    
+          console.log('Book deleted successfully!');
+        } catch (error) {
+          console.error('Error deleting book:', error);
+        }
+      }
+
+      public async getComments(Id: string) {
+        try {
+            const Ref = doc(database, 'books', Id);
+            const CollectionRef = collection(Ref, 'comments');
+            const querySnapshot = await getDocs(CollectionRef);
+
+            const comments: Comment[] = [];
+
+            await Promise.all(
+                querySnapshot.docs.map(async (doc) => {
+                    const commentData = doc.data();
+                    const Profiles = new FatchProfiles();
+                    const userProfile = await Profiles.fetchProfile(commentData.uid);
+                    if (userProfile) {
+                        comments.push({
+                            id: doc.id,
+                            uid: commentData.uid,
+                            profile: userProfile,
+                            text: commentData.text,
+                            timestamp: commentData.timestamp,
+                        });
+                    }
+                })
+            );
+            comments.sort((a: Comment, b: Comment) => {
+                const aTimestamp = a.timestamp?.seconds ?? 0;
+                const bTimestamp = b.timestamp?.seconds ?? 0;
+                return bTimestamp - aTimestamp;
+            });
+            return comments;
+        } catch (error) {
+            console.error('Error getting comments: ', error);
+            return [];
+        }
+    }
+
+
+    
+    public async deleteComment(Id: string, commentId: string) {
+      try {
+          const postCollection = doc(database, 'books', Id, 'comments', commentId);
+          await deleteDoc(postCollection);
+          console.log('Comment deleted successfully!');
+
+      } catch (error) {
+          console.error('Error deleting Comment:', error);
+      }
+  }
 
 }
